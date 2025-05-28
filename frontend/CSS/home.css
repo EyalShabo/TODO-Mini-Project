@@ -1,0 +1,34 @@
+#project-list{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.project-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.project-item h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 16px;
+}
+
+.delete-project-button {
+    width: 20px;
+    height: 20px;
+    margin: 5px 5px 5px 15px;
+    cursor: pointer;
+}
+
+.new-project-bar {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}

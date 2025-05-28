@@ -1,34 +1,39 @@
-#project-list{
+.new-task-bar{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+#kanban-board{
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.project-item {
+.kanban-board-step {
+    background-color: rgb(187, 187, 187);
+    border-radius: 5px;
+    width: 25%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+}
+
+.task{
+    padding: 5px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    border: 1px solid #ccc;
+    background-color: rgb(248, 248, 248);
     border-radius: 5px;
+    margin: 10px 20px;
 }
 
-.project-item h2 {
-    margin: 0;
-    text-align: center;
-    font-size: 16px;
-}
-
-.delete-project-button {
+.delete-task-button {
+    float: right;
     width: 20px;
     height: 20px;
-    margin: 5px 5px 5px 15px;
     cursor: pointer;
-}
-
-.new-project-bar {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
 }
