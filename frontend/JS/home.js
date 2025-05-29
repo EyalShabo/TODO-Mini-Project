@@ -39,12 +39,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function loadProjectsList(){
-    const projectsObjectsList = JSON.parse(localStorage.getItem(PROJECTS_ITEMS) || "[]").map(item => {
-        return JSON.parse(localStorage.getItem(PROJECTS_ITEMS + "_" + item))
-    });
-    PROJECTS_LIST_ELEMENT.innerHTML = projectsObjectsList.map(projectObject => 
+    const projectsObjectsList = getAllProjectsFromDB();
+    
+    if (projectsObjectsList.length === 0) {
+        PROJECTS_LIST_ELEMENT.innerHTML = "<p>No projects available. Please create a new project.</p>";
+    }
+    else{
+        PROJECTS_LIST_ELEMENT.innerHTML = projectsObjectsList.map(projectObject => 
         `<div class="project-item" data-name="${projectObject["projectId"]}">
             <h2>${projectObject["projectName"]}</h2>
             <img src="Images/Icons/grabage.png" alt="Delete Project" class="delete-project-button">
         </div>`).join("");
+    }
+
 }

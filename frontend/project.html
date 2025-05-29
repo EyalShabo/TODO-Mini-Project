@@ -11,7 +11,7 @@
 </head>
 <body>
     <form>
-
+        <h1>Project <span id="project-name"></span> - Kanban Board</h1>
         <div class="new-task-bar">
             <input id="task-title-input" type="text" placeholder="Enter Take Title">
             <button id="add-new-task-button" type="button">Add Task</button>
@@ -20,18 +20,33 @@
         <div id="kanban-board">
             <div class="kanban-board-step" >
                 <h1>TO DO (<span id="todo-count">~</span>)</h1>
-                <div class="task" draggable="true">
-                    <h3>Learn JS</h3>
-                    <img src="Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">
+                <div id="todo-list">
+                    <div class="task" draggable="true">
+                        <h3>Learn JS</h3>
+                        <img src="Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">
+                    </div>
                 </div>
+
             </div>
 
             <div class="kanban-board-step">
                 <h1>In Progress (<span id="in-progress-count">~</span>)</h1>
+                <div id="in-progress-list">
+                    <div class="task" draggable="true">
+                        <h3>Learn HTML</h3>
+                        <img src="Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">
+                    </div>
+                </div>
             </div>
 
             <div class="kanban-board-step">
                 <h1>Done (<span id="done-count">~</span>)</h1>
+                <div id="done-list">
+                    <div class="task" draggable="true">
+                        <h3>Learn CSS</h3>
+                        <img src="Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">
+                    </div>
+                </div>
             </div>
         </div>
     </form>
