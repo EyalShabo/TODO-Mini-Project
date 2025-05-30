@@ -55,7 +55,8 @@ function addTheTaskLastIdInOne() {
 function addTaskToProjectInDB(projectId, task) {
     addTheTaskLastIdInOne();
     const project = getProjectFromDB(projectId);
-    project.id = getTaskLastId();
+    task.id = getTaskLastId();
+
     if (project) {
         project.todoList.push(task);
     }

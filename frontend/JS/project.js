@@ -2,6 +2,7 @@ const PARAMS = new URLSearchParams(window.location.search);
 const PROJECT_ID = PARAMS.get('projectId');
 const PROJECT_NAME_IN_DB = PROJECTS_ITEMS + "_" + PROJECT_ID;
 var draggedTask = null;
+var project = getProjectFromDB(PROJECT_ID);
 
 const PROJECT_NAME_ELEMENT = document.getElementById("project-name");
 const TASK_TITLE_INPUT_ELEMENT = document.getElementById("task-title-input");
@@ -14,13 +15,55 @@ const IN_PROGRESS_COUNT_ELEMENT = document.getElementById("in-progress-count");
 const DONE_COUNT_ELEMENT = document.getElementById("done-count");
 
 document.addEventListener("DOMContentLoaded", function () {
-    const project = getProjectFromDB(PROJECT_ID);
+    project = getProjectFromDB(PROJECT_ID);
+
     if (project) {
-        PROJECT_NAME_ELEMENT.textContent = project.projectName;
+        PROJECT_NAME_ELEMENT.innerHTML = project.projectName;
+
+        document.querySelectorAll('.kanban-board-step').forEach(column => {
+            column.addEventListener('dragover', (e) => {
+                e.preventDefault(); 
+            });
+
+            column.addEventListener('drop', (e) => {
+                if (draggedTask) {
+                    const innerList = column.querySelector(".kanban-list");
+                    const from = draggedTask.dataset.step;
+                    const to = innerList.dataset.stepname;
+
+                    draggedTask.dataset.step = innerList.dataset.stepname;
+                    
+                    if(innerList){
+                        innerList.appendChild(draggedTask);
+                        passTaskInDB(project.projectId, Number(draggedTask.dataset.taskId), from, to);
+                    }
+                }
+            });
+        });
+
+        loadTasks();
+
     } else {
         alert("Project not found.");
         window.location.href = "home.html";
     }
+
+
+});
+
+ADD_NEW_TASK_BUTTON_ELEMENT.addEventListener("click", function(e) {
+    e.preventDefault();
+
+    if(!TASK_TITLE_INPUT_ELEMENT.value.trim()){
+        alert("Please enter a title for the task. The task title cannot be empty.")
+    }
+
+    else {
+        addTaskToProjectInDB(project.projectId, {title: TASK_TITLE_INPUT_ELEMENT.value});
+        loadTasks();
+        TASK_TITLE_INPUT_ELEMENT.value = "";
+    }
+
 });
 
 function addTaskToProject() {
@@ -39,20 +82,27 @@ function addTaskToProject() {
     }
 }
 
-function createTaskElement(task) {
+function createTaskElement(task, taskInStep) {
     const taskElement = document.createElement("div");
     taskElement.className = "task";
     taskElement.draggable = true;
-    taskElement.textContent = task.title;
+    taskElement.dataset.step = taskInStep;
+    taskElement.dataset.taskId = task.id;
+    taskElement.innerHTML = 
+        `<h3>${task.title}</h3>
+         <img src="Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">`;
 
     taskElement.addEventListener("dragstart", function (event) {
         draggedTask = taskElement;
-        task.style.display = "none";
+        setTimeout(() => taskElement.style.display = "none", 0);
     });
 
     taskElement.addEventListener("dragend", function () {
-        taskElement.style.display = "flex";
-        draggedTask = null;
+        setTimeout(() => {
+            taskElement.style.display = "flex";
+            draggedTask = null;
+        }, 0);
+
     });
 
     return taskElement;
@@ -60,26 +110,25 @@ function createTaskElement(task) {
 
 function loadTasks() {
     const project = getProjectFromDB(PROJECT_ID);
+
     if (project) {
         TODO_LIST_ELEMENT.innerHTML = "";
         IN_PROGRESS_LIST_ELEMENT.innerHTML = "";
         DONE_LIST_ELEMENT.innerHTML = "";
 
         project.todoList.forEach(task => {
-            const taskElement = createTaskElement(task, "todo");
+            const taskElement = createTaskElement(task, "todoList");
             TODO_LIST_ELEMENT.appendChild(taskElement);
         });
 
         project.inProgressList.forEach(task => {
-            const taskElement = createTaskElement(task, "in-progress");
+            const taskElement = createTaskElement(task, "inProgressList");
             IN_PROGRESS_LIST_ELEMENT.appendChild(taskElement);
         });
 
         project.doneList.forEach(task => {
-            const taskElement = createTaskElement(task, "done");
+            const taskElement = createTaskElement(task, "doneList");
             DONE_LIST_ELEMENT.appendChild(taskElement);
         });
-
-        updateCounts();
     }
 }
