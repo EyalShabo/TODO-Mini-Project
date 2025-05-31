@@ -16,7 +16,10 @@ function createElement(taskJson, stage){
     taskElement.dataset.id = taskJson.id;
     taskElement.innerHTML = 
         `<h3>${taskJson.title}</h3>
-        <img src="CSS/Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">`;
+        <div class="task-actions">
+            <img src="CSS/Images/Icons/edit.png" alt="Edit Task" class="edit-task-button">
+            <img src="CSS/Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">
+        </div>`;
 
     taskElement.addEventListener("dragstart", function (event) {
         draggedTask = taskElement;

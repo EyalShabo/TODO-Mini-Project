@@ -13,8 +13,20 @@
     margin: 10px 20px;
 }
 
-.delete-task-button {
+.task-ations {
     float: right;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.delete-task-button {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.edit-task-button {
     width: 20px;
     height: 20px;
     cursor: pointer;
