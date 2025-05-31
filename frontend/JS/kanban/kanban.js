@@ -29,7 +29,6 @@ function makeStagesDragOver(){
 
 document.addEventListener("DOMContentLoaded", function () {
     const project = Tasks.getProject();
-    console.log(project);
     if (project) {
         KanbanDOM.PROJECT_NAME_ELEMENT.innerHTML = project.projectName;
         makeStagesDragOver();
