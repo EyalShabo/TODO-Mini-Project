@@ -55,7 +55,23 @@ function _loadTasks(filterFunction){
             stageElement.querySelector(".task-list").appendChild(createElement(task, stage));
         })
     });
+
+    updateProgressBar(filterFunction);
 }
+
+function updateProgressBar(filterFunction){
+    const project = getProject();
+
+    const totalTasks = Array.from(document.querySelectorAll(".progress-bar")).map(bar => project[bar.dataset.stage].filter(filterFunction).length).reduce((a, b) => a + b, 0);
+
+    document.querySelectorAll(".progress-bar").forEach(bar => {
+        const stage = bar.dataset.stage;
+        const count = project[stage].filter(filterFunction).length;
+        const percent = totalTasks > 0 ? (count / totalTasks) * 100 : 0;
+        bar.style.width = percent + "%";
+    });
+}
+
 
 export function loadTasks(){
     _loadTasks((item) => {return true});
