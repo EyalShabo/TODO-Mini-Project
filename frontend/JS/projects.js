@@ -4,7 +4,7 @@ import { ProjectRepository } from "./DB/projectRepository.js";
 
 function loadProjectsList(){
     const projectsObjectsList = ProjectRepository.getAll();
-    
+    console.log(projectsObjectsList);
     if (projectsObjectsList.length === 0) {
         ProjectsDOM.PROJECTS_LIST_ELEMENT.innerHTML = "<p>No projects available. Please create a new project.</p>";
     }
@@ -36,9 +36,9 @@ ProjectsDOM.ADD_NEW_PROJECT_BUTTON.addEventListener("click", function(e) {
 ProjectsDOM.PROJECTS_LIST_ELEMENT.addEventListener("click", function(event) {
     if (event.target.classList.contains("delete-project-button")) {
         const projectElement = event.target.closest(".project-item");
-        const projectId = projectElement.dataset.id;
+        const projectId = Number(projectElement.dataset.id);
         ProjectRepository.delete(projectId)
-        projectElement.remove();
+        loadProjectsList();
     }
     else if(event.target.closest(".project-item")) {
         window.location.href = "kanban.html?projectId=" + event.target.closest(".project-item").dataset.id;

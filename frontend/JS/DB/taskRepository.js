@@ -8,27 +8,28 @@ export class TaskRepository{
     }
 
     static incrementTaskIdCounter(){
-        localStorage.setItem(NEXT_TASK_ID_KEY, this.getNextTaskId + 1);
+        localStorage.setItem(NEXT_TASK_ID_KEY, this.getNextTaskId() + 1);
     }
 
     static create(projectId, taskJson){
         const taskId = this.getNextTaskId();
         const project = ProjectRepository.get(projectId)
 
-        task.id = taskId;
+        taskJson.id = taskId;
 
         if (project) {
-            project.todoList.push(task);
+            project.todo.push(taskJson);
             localStorage.setItem(ProjectRepository.getProjectStorgeKey(projectId), JSON.stringify(project));
         }
         
+        this.incrementTaskIdCounter();
     }
 
-    static delete(projectId, taskId){
-        const project = ProjectRepository.get(projectId)
+    static delete(projectId, stage, taskId){
+        let project = ProjectRepository.get(projectId)
 
         if(project){
-            project.todoList = project.todoList.filter(task => task.id !== taskId);
+            project[stage] = project[stage].filter(task => task.id !== taskId);
             localStorage.setItem(ProjectRepository.getProjectStorgeKey(projectId), JSON.stringify(project));
         }
     }

@@ -1,0 +1,17 @@
+#kanban-board{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.kanban-board-stage {
+    background-color: rgb(187, 187, 187);
+    border-radius: 5px;
+    width: 25%;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+
+}

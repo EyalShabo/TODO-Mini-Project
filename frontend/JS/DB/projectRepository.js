@@ -25,14 +25,14 @@ export class ProjectRepository{
         localStorage.setItem(this.getProjectStorgeKey(projectId), JSON.stringify({
             projectName: projectName,
             projectId: projectId,
-            todoList: [],
-            inProgressList: [],
-            doneList: []
+            todo: [],
+            inProgress: [],
+            done: []
         }));
     }
 
     static delete(projectId){
-        localStorage.setItem(PROJECT_IDS_KEY, JSON.stringify(this.getIdsList.filter(item => item !== projectId)));
+        localStorage.setItem(PROJECT_IDS_KEY, JSON.stringify(this.getIdsList().filter(item => item !== projectId)));
         localStorage.removeItem(this.getProjectStorgeKey(projectId));
     }
 

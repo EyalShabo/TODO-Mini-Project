@@ -1,4 +1,3 @@
-// for XSS attack
 export function escapeHTML(str) {
     return str
         .replace(/&/g, "&amp;")  
