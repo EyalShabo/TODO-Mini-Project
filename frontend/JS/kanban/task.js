@@ -15,7 +15,12 @@ function createElement(taskJson, stage){
     taskElement.dataset.stage = stage;
     taskElement.dataset.id = taskJson.id;
     taskElement.innerHTML = 
-        `<h3>${taskJson.title}</h3>
+        `<div class="task-content">
+            <h3>${taskJson.title}</h3>
+            <p>${taskJson.description || ""}</p>
+            <p><strong>Difficulty:</strong> ${taskJson.level || "N/A"}</p>
+            <p><strong>Assigned to:</strong> ${taskJson.assignedTo ? taskJson.assignedTo.length > 0 ? taskJson.assignedTo.join(", ") : "Everyone" : "Everyone"}</p>
+        </div>
         <div class="task-actions">
             <img src="CSS/Images/Icons/edit.png" alt="Edit Task" class="edit-task-button">
             <img src="CSS/Images/Icons/grabage.png" alt="Delete Task" class="delete-task-button">

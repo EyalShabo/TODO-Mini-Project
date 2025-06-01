@@ -1,6 +1,7 @@
 import { TaskRepository } from "./../DB/taskRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
 import * as Tasks from "./task.js";
+import * as Multiselect from "./../multiselect.js";
 
 function makeStagesDragOver(){
     const project = Tasks.getProject();

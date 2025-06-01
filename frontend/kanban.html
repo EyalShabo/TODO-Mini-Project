@@ -8,14 +8,53 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/kanban-board.css">
     <link rel="stylesheet" href="CSS/task.css">
+    <link rel="stylesheet" href="CSS/multiselect.css">
     <script type="module" src="JS/kanban/kanban.js" defer></script>
 </head>
 <body>
     <form>
         <h1>Project <span id="project-name"></span> - Kanban Board</h1>
         <div class="new-task-bar">
-            <input id="task-title-input" type="text" placeholder="Enter Take Title">
-            <button id="add-new-task-button" type="button">Add Task</button>
+            <div id="task-inputs">
+                <input id="task-title-input" type="text" placeholder="Enter Task Title">
+                <input id="task-description-input" type="text" placeholder="Enter Task Description">
+            </div>
+            <div id="task-extras">
+                <select id="task-level-select">
+                    <option value="1">Easy</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Hard</option>
+                </select>
+
+                <div class="multiselect">
+                    <div class="multiselect-selected-options">Assign to: <span class="multiselect-selected">All</span></div>
+                    <div class="multiselect-options-dropdown">
+                        <input type="text" class="multiselect-search" placeholder="Search...">
+                        <div class="multiselect-option"><label><input type="checkbox" value="Eyal"> Eyal</label></div>
+                        <div class="multiselect-option"><label><input type="checkbox" value="Noa"> Noa</label></div>
+                        <div class="multiselect-option"><label><input type="checkbox" value="Yossi"> Yossi</label></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="add-new-task-button" type="button">Add Task</button>
+
+        <div id="task-filters">
+            <label for="filter-select">Filter by Difficulty:</label>
+            <select id="filter-select">
+                <option value="all">All</option>
+                <option value="1">Easy</option>
+                <option value="2">Medium</option>
+                <option value="3">Hard</option>
+            </select>
+
+            <label for="sort-select">Sort by Difficulty:</label>
+            <select id="sort-select">
+                <option value="none">None</option>
+                <option value="asc">Easy → Hard</option>
+                <option value="desc">Hard → Easy</option>
+            </select>
         </div>
     </form>
 
@@ -23,6 +62,9 @@
         <div class="kanban-board-stage" >
             <h1>TO DO (<span class="count">~</span>)</h1>
             <div class="task-list" data-stage="todo">
+                <div class="task">
+                    
+                </div>
             </div>
         </div>
 
