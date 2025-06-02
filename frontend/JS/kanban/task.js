@@ -2,6 +2,7 @@ import { UserRepository } from "../DB/userRepository.js";
 import { ProjectRepository } from "./../DB/projectRepository.js";
 import { TaskRepository } from "./../DB/taskRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
+import { escapeHTML } from "./../security.js"
 export var draggedTask = null;
 
 export function getProject(){
@@ -17,10 +18,10 @@ function createElement(taskJson, stage){
     taskElement.dataset.id = taskJson.id;
     taskElement.innerHTML = 
         `<div class="task-content">
-            <h3>${taskJson.title}</h3>
-            <p>${taskJson.description || ""}</p>
-            <p><strong>Difficulty:</strong> ${taskJson.difficulty || "N/A"}</p>
-            <p><strong>Assigned to:</strong> ${taskJson.assignedTo ? taskJson.assignedTo.length > 0 ? taskJson.assignedTo.map(user => UserRepository.getUserObject(user).name).join(", ") : "Everyone" : "Everyone"}</p>
+            <h3>${escapeHTML(taskJson.title)}</h3>
+            <p>${escapeHTML(taskJson.description || "")}</p>
+            <p><strong>Difficulty:</strong> ${escapeHTML(taskJson.difficulty || "N/A")}</p>
+            <p><strong>Assigned to:</strong> ${escapeHTML(taskJson.assignedTo ? taskJson.assignedTo.length > 0 ? taskJson.assignedTo.map(user => UserRepository.getUserObject(user).name).join(", ") : "Everyone" : "Everyone")}</p>
         </div>
         <div class="task-actions">
             <img src="CSS/Images/Icons/edit.png" alt="Edit Task" class="edit-task-button">
