@@ -1,0 +1,64 @@
+#update-task-modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); 
+    padding-top: 60px;
+}
+
+#update-task-modal-content{
+    position: relative;
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    width: 80%;
+    padding: 20px;
+}
+
+#close-task-edit {
+    position: absolute;
+    right: 25px;
+    top: 10;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#close-task-edit:hover {
+    color: red;
+}
+
+#task-fields {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#task-fields input{
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#task-fields label{
+    margin-top: 10px;
+}
+
+#save-task-edit{
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    margin-top: 15px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+#select-assigned-for-update {
+    width: 100%;
+}

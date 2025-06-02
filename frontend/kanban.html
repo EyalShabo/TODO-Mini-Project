@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="CSS/task.css">
     <link rel="stylesheet" href="CSS/multiselect.css">
     <link rel="stylesheet" href="CSS/nav-bar.css">
+    <link rel="stylesheet" href="CSS/edit-task-modal.css">
     <script type="module" src="JS/kanban/kanban.js" defer></script>
 </head>
 <body>
@@ -124,6 +125,44 @@
                 <span>Done</span>
             </div>
         </div>
+    </div>
+
+    <div id="update-task-modal">
+        <form id="update-task-modal-content">
+            <div id="close-task-edit">
+                <span >&times;</span>
+            </div>
+            <div id="task-fields">
+                <label><b>Task Title</b></label>
+                <input type="text" placeholder="Enter Task Title">
+
+                <label><b>Task Description</b></label>
+                <input type="text" placeholder="Enter Task Description">
+
+                <label><b>Task Difficulty</b></label>
+                <select id="task-update-difficulty-select">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <label><b>Assign To</b></label>
+                <div class="multiselect" id="select-assigned-for-update">
+                    <div class="multiselect-selected-options">Assign to: <span class="multiselect-selected">All</span></div>
+                    <div class="multiselect-options-dropdown">
+                        <input type="text" class="multiselect-search" placeholder="Search...">
+                        <div id="select-assigned-add-options-for-update">
+
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="save-task-edit">
+                    Save
+                </button>
+            </div>
+
+        </form>
     </div>
     
 </body>
