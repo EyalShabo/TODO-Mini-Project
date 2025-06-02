@@ -10,6 +10,7 @@ export const TASK_SELECT_ASSIGNED_ADD_OPTIONS = document.getElementById("select-
 export const ADD_NEW_TASK_BUTTON = document.getElementById("add-new-task-button");
 
 // Filter + Sort
+export const TASK_FILTERS_ELEMENT = document.getElementById("task-filters");
 export const FILTER_DIFFICULTY_LEVEL = document.getElementById("filter-difficulty-level");
 export const FILTER_ASSIGNED = document.getElementById("filter-assigned");
 export const FILTER_ASSIGNED_ADD_OPTIONS = document.getElementById("filter-assigned-add-options");

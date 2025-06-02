@@ -4,6 +4,14 @@ import { TaskRepository } from "./../DB/taskRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
 import { escapeHTML } from "./../security.js"
 export var draggedTask = null;
+var filterDifficultyArray = [];
+var assignedToArray = [];
+
+const difficultyOrder = {
+    "Easy": 1,
+    "Medium": 2,
+    "Hard": 3
+};
 
 export function getProject(){
     const params = new URLSearchParams(window.location.search);
@@ -49,7 +57,7 @@ function createElement(taskJson, stage){
     return taskElement;
 }
 
-function _loadTasks(filterFunction){
+function _loadTasks(filterFunction, sortFunction){
     const project = getProject();
 
     document.querySelectorAll(".task-list").forEach(stage => {
@@ -58,7 +66,7 @@ function _loadTasks(filterFunction){
 
     document.querySelectorAll(".kanban-board-stage").forEach(stageElement => {
         const stage = stageElement.querySelector(".task-list").dataset.stage;
-        const stageItems = project[stage].filter(filterFunction);
+        const stageItems = project[stage].sort(sortFunction).filter(filterFunction);
         stageElement.querySelector(".count").innerHTML = stageItems.length;
 
         stageItems.forEach(task => {
@@ -67,6 +75,41 @@ function _loadTasks(filterFunction){
     });
 
     updateProgressBar(filterFunction);
+}
+
+function getSortFunctionByDifficulty() {
+    const order = KanbanDOM.SORT_SELECT.value;
+
+    switch (order) {
+        case "asc":
+            return (a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty];
+        case "desc":
+            return (a, b) => difficultyOrder[b.difficulty] - difficultyOrder[a.difficulty];
+        default:
+            return () => 0; 
+    }
+}
+
+export function loadTasks(){
+    filterDifficultyArray = Array.from(KanbanDOM.FILTER_DIFFICULTY_LEVEL.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+    filterDifficultyArray = filterDifficultyArray.length == 0 ? 
+        Array.from(KanbanDOM.FILTER_DIFFICULTY_LEVEL.querySelectorAll('input[type="checkbox"]')).map(cb => cb.value) 
+            :
+        filterDifficultyArray;
+    
+    assignedToArray =  Array.from(KanbanDOM.FILTER_ASSIGNED.querySelectorAll('input[type="checkbox"]:checked')).map(cb => Number(cb.value));
+    assignedToArray  = assignedToArray.length == 0 ? 
+        Array.from(KanbanDOM.FILTER_ASSIGNED.querySelectorAll('input[type="checkbox"]')).map(cb => Number(cb.value)) 
+            :
+        assignedToArray ;
+
+    const filterFunction = (task) => {
+        const matchesDifficulty = filterDifficultyArray.includes(task.difficulty);
+        const matchesAssignee = task.assignedTo.length === 0 || task.assignedTo.some(id => assignedToArray.includes(id));
+        return matchesDifficulty && matchesAssignee;
+    }
+
+    _loadTasks(filterFunction , getSortFunctionByDifficulty());
 }
 
 function updateProgressBar(filterFunction){
@@ -80,11 +123,6 @@ function updateProgressBar(filterFunction){
         const percent = totalTasks > 0 ? (count / totalTasks) * 100 : 0;
         bar.style.width = percent + "%";
     });
-}
-
-
-export function loadTasks(){
-    _loadTasks((item) => {return true});
 }
 
 function addTask(){

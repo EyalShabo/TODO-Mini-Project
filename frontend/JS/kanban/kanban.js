@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (project) {
         KanbanDOM.PROJECT_NAME_ELEMENT.innerHTML = project.projectName;
         makeStagesDragOver();
-        Tasks.loadTasks();
         
         UserRepository.getList().forEach(user => {
             KanbanDOM.TASK_SELECT_ASSIGNED_ADD_OPTIONS.innerHTML += `
@@ -53,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>`;
         });
 
+        Tasks.loadTasks();
 
     } else {
         alert("Project not found.");
@@ -60,3 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+KanbanDOM.TASK_FILTERS_ELEMENT.addEventListener("change", function(){
+    Tasks.loadTasks();
+});
