@@ -6,10 +6,10 @@
 }
 
 .kanban-board-stage {
-    background-color: rgb(187, 187, 187);
-    border-radius: 5px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
     width: 25%;
-    height: 70vh;
+    height: 69vh;
     display: flex;
     flex-direction: column;
     overflow: auto;

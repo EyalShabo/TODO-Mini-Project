@@ -23,6 +23,7 @@ export class TaskRepository{
         }
         
         this.incrementTaskIdCounter();
+        return taskId;
     }
 
     static delete(projectId, stage, taskId){
@@ -32,6 +33,16 @@ export class TaskRepository{
             project[stage] = project[stage].filter(task => task.id !== taskId);
             localStorage.setItem(ProjectRepository.getProjectStorgeKey(projectId), JSON.stringify(project));
         }
+    }
+
+    static get(projectId, stage, taskId){
+        const project = ProjectRepository.get(projectId);
+
+       if (project) {
+            return project[stage].find(task => task.id === taskId) || null;
+        }
+
+        return null;
     }
 
     static moveBetweenStages(projectId, taskId, fromList, toList){

@@ -8,14 +8,77 @@
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="stylesheet" href="CSS/kanban-board.css">
     <link rel="stylesheet" href="CSS/task.css">
+    <link rel="stylesheet" href="CSS/multiselect.css">
+    <link rel="stylesheet" href="CSS/nav-bar.css">
+    <link rel="stylesheet" href="CSS/edit-task-modal.css">
     <script type="module" src="JS/kanban/kanban.js" defer></script>
 </head>
 <body>
+    <div class="nav-bar">
+        <ul class="nav-list">
+            <li><a href="index.html">Projects</a></li>
+            <li><a href="users.html">Users</a></li>
+        </li>
+    </div>
     <form>
         <h1>Project <span id="project-name"></span> - Kanban Board</h1>
         <div class="new-task-bar">
-            <input id="task-title-input" type="text" placeholder="Enter Take Title">
-            <button id="add-new-task-button" type="button">Add Task</button>
+            <div id="task-inputs">
+                <input id="task-title-input" type="text" placeholder="Enter Task Title">
+                <input id="task-description-input" type="text" placeholder="Enter Task Description">
+            </div>
+            <div id="task-extras">
+                <select id="task-level-select">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <div class="multiselect" id="select-assigned">
+                    <div class="multiselect-selected-options">Assign to: <span class="multiselect-selected">All</span></div>
+                    <div class="multiselect-options-dropdown">
+                        <input type="text" class="multiselect-search" placeholder="Search...">
+                        <div id="select-assigned-add-options">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button id="add-new-task-button" type="button">Add Task</button>
+
+        <div id="task-filters">
+            <label for="filter-select">Filter by Difficulty:</label>
+            <div class="multiselect" id="filter-difficulty-level">
+                <div class="multiselect-selected-options">Difficulty Level: <span class="multiselect-selected">All</span></div>
+                <div class="multiselect-options-dropdown">
+                    <input type="text" class="multiselect-search" placeholder="Search...">
+                    <div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="Easy"> Easy</label></div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="Medium"> Medium</label></div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="Hard"> Hard</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <label for="filter-assigned">Assigned To:</label>
+            <div class="multiselect" id="filter-assigned">
+                <div class="multiselect-selected-options">Assigned to: <span class="multiselect-selected">All</span></div>
+                <div class="multiselect-options-dropdown">
+                    <input type="text" class="multiselect-search" placeholder="Search...">
+                    <div id="filter-assigned-add-options">
+
+                    </div>
+                </div>
+            </div>
+
+            <label for="sort-select">Sort by Difficulty:</label>
+            <select id="sort-select">
+                <option value="none">None</option>
+                <option value="asc">Easy → Hard</option>
+                <option value="desc">Hard → Easy</option>
+            </select>
         </div>
     </form>
 
@@ -23,6 +86,9 @@
         <div class="kanban-board-stage" >
             <h1>TO DO (<span class="count">~</span>)</h1>
             <div class="task-list" data-stage="todo">
+                <div class="task">
+                    
+                </div>
             </div>
         </div>
 
@@ -59,6 +125,44 @@
                 <span>Done</span>
             </div>
         </div>
+    </div>
+
+    <div id="update-task-modal">
+        <form id="update-task-modal-content">
+            <div id="close-task-edit">
+                <span >&times;</span>
+            </div>
+            <div id="task-fields">
+                <label><b>Task Title</b></label>
+                <input type="text" placeholder="Enter Task Title" id="task-update-title">
+
+                <label><b>Task Description</b></label>
+                <input type="text" placeholder="Enter Task Description" id="task-update-description">
+
+                <label><b>Task Difficulty</b></label>
+                <select id="task-update-difficulty-select">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <label><b>Assign To</b></label>
+                <div class="multiselect" id="select-assigned-for-update">
+                    <div class="multiselect-selected-options">Assign to: <span class="multiselect-selected">All</span></div>
+                    <div class="multiselect-options-dropdown">
+                        <input type="text" class="multiselect-search" placeholder="Search...">
+                        <div id="select-assigned-add-options-for-update">
+
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="save-task-edit">
+                    Save
+                </button>
+            </div>
+
+        </form>
     </div>
     
 </body>

@@ -1,33 +1,71 @@
 .new-task-bar{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 10px;
 }
 
-.task{
-    padding: 5px;
+#add-new-task-button{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+#task-inputs{
     display: flex;
-    justify-content: space-between;
-    background-color: rgb(248, 248, 248);
+    flex-direction: column;
+    width: 30%;
+    margin-right: 20px;
+}
+
+
+#task-inputs input,
+#task-level-select,
+#task-extras .multiselect{
+    width: 100%;
     border-radius: 5px;
-    margin: 10px 20px;
+    box-sizing: border-box;
+    font-size: 14px;
 }
 
-.task-ations {
-    float: right;
+
+#task-extras {
     display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+.task {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+    padding: 10px;
+    margin: 10px 20px;
+    border-left: #008cba 5px solid;
+}
+
+.task-actions {
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
     gap: 5px;
-    align-items: center;
 }
 
-.delete-task-button {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-}
-
+.delete-task-button,
 .edit-task-button {
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+#task-filters {
+    margin: 10px 0 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
