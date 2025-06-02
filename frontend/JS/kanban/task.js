@@ -19,7 +19,9 @@ export function getProject(){
 }
 
 function createElement(taskJson, stage){
+    const difficultyColorArray = ["#A0C6EB", "#438FD7", "#215F9A"];
     const taskElement = document.createElement("div");
+    taskElement.style.borderLeftColor = difficultyColorArray[difficultyOrder[taskJson.difficulty] - 1]
     taskElement.className = "task";
     taskElement.draggable = true;
     taskElement.dataset.stage = stage;

@@ -4,6 +4,12 @@
     font-family: Arial;
 }
 
+body {
+    margin: 0;
+
+    color: #212529;
+}
+
 h1 {
     text-align: center;
     color: #333;
