@@ -1,7 +1,6 @@
 document.querySelectorAll(".multiselect").forEach(multiselect => {
     const selectedBox = multiselect.querySelector(".multiselect-selected-options");
     const dropdown = multiselect.querySelector(".multiselect-options-dropdown");
-    const checkboxes = multiselect.querySelectorAll('input[type="checkbox"]');
     const selectedSpan = multiselect.querySelector(".multiselect-selected");
     const searchInput = multiselect.querySelector(".multiselect-search");
 
@@ -10,9 +9,9 @@ document.querySelectorAll(".multiselect").forEach(multiselect => {
     });
 
     function updateSelected() {
-        const selected = Array.from(checkboxes)
+        const selected = Array.from(multiselect.querySelectorAll('input[type="checkbox"]'))
             .filter(cb => cb.checked)
-            .map(cb => cb.value);
+            .map(cb => cb.closest("label").textContent);
         selectedSpan.textContent = selected.length ? selected.join(", ") : "All";
     }
 

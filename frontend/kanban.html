@@ -21,18 +21,18 @@
             </div>
             <div id="task-extras">
                 <select id="task-level-select">
-                    <option value="1">Easy</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Hard</option>
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
                 </select>
 
-                <div class="multiselect">
+                <div class="multiselect" id="select-assigned">
                     <div class="multiselect-selected-options">Assign to: <span class="multiselect-selected">All</span></div>
                     <div class="multiselect-options-dropdown">
                         <input type="text" class="multiselect-search" placeholder="Search...">
-                        <div class="multiselect-option"><label><input type="checkbox" value="Eyal"> Eyal</label></div>
-                        <div class="multiselect-option"><label><input type="checkbox" value="Noa"> Noa</label></div>
-                        <div class="multiselect-option"><label><input type="checkbox" value="Yossi"> Yossi</label></div>
+                        <div id="select-assigned-add-options">
+
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,12 +42,28 @@
 
         <div id="task-filters">
             <label for="filter-select">Filter by Difficulty:</label>
-            <select id="filter-select">
-                <option value="all">All</option>
-                <option value="1">Easy</option>
-                <option value="2">Medium</option>
-                <option value="3">Hard</option>
-            </select>
+            <div class="multiselect" id="filter-difficulty-level">
+                <div class="multiselect-selected-options">Difficulty Level: <span class="multiselect-selected">All</span></div>
+                <div class="multiselect-options-dropdown">
+                    <input type="text" class="multiselect-search" placeholder="Search...">
+                    <div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="easy"> Easy</label></div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="medium"> Medium</label></div>
+                    <div class="multiselect-option"><label><input type="checkbox" value="hard"> Hard</label></div>
+                    </div>
+                </div>
+            </div>
+
+            <label for="filter-assigned">Assigned To:</label>
+            <div class="multiselect" id="filter-assigned">
+                <div class="multiselect-selected-options">Assigned to: <span class="multiselect-selected">All</span></div>
+                <div class="multiselect-options-dropdown">
+                    <input type="text" class="multiselect-search" placeholder="Search...">
+                    <div id="filter-assigned-add-options">
+
+                    </div>
+                </div>
+            </div>
 
             <label for="sort-select">Sort by Difficulty:</label>
             <select id="sort-select">

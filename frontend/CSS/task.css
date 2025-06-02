@@ -59,8 +59,8 @@
 
 #task-filters{
     margin-top: 3px;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }

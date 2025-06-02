@@ -4,7 +4,7 @@ import { ProjectRepository } from "./DB/projectRepository.js";
 
 function loadProjectsList(){
     const projectsObjectsList = ProjectRepository.getAll();
-    console.log(projectsObjectsList);
+    
     if (projectsObjectsList.length === 0) {
         ProjectsDOM.PROJECTS_LIST_ELEMENT.innerHTML = "<p>No projects available. Please create a new project.</p>";
     }

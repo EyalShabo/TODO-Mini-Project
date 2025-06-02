@@ -1,3 +1,4 @@
+import { UserRepository } from "../DB/userRepository.js";
 import { ProjectRepository } from "./../DB/projectRepository.js";
 import { TaskRepository } from "./../DB/taskRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
@@ -18,8 +19,8 @@ function createElement(taskJson, stage){
         `<div class="task-content">
             <h3>${taskJson.title}</h3>
             <p>${taskJson.description || ""}</p>
-            <p><strong>Difficulty:</strong> ${taskJson.level || "N/A"}</p>
-            <p><strong>Assigned to:</strong> ${taskJson.assignedTo ? taskJson.assignedTo.length > 0 ? taskJson.assignedTo.join(", ") : "Everyone" : "Everyone"}</p>
+            <p><strong>Difficulty:</strong> ${taskJson.difficulty || "N/A"}</p>
+            <p><strong>Assigned to:</strong> ${taskJson.assignedTo ? taskJson.assignedTo.length > 0 ? taskJson.assignedTo.map(user => UserRepository.getUserObject(user).name).join(", ") : "Everyone" : "Everyone"}</p>
         </div>
         <div class="task-actions">
             <img src="CSS/Images/Icons/edit.png" alt="Edit Task" class="edit-task-button">
@@ -91,7 +92,13 @@ function addTask(){
     }
 
     else {
-        TaskRepository.create(getProject().projectId, {title: KanbanDOM.TASK_TITLE_INPUT.value});
+        TaskRepository.create(getProject().projectId, 
+            {
+                title: KanbanDOM.TASK_TITLE_INPUT.value,
+                description: KanbanDOM.TASK_DESCRIPTION_INPUT.value,
+                difficulty: KanbanDOM.TASK_LEVEL_SELECT.value,
+                assignedTo: Array.from(KanbanDOM.TASK_SELECT_ASSIGNED.querySelectorAll('input[type="checkbox"]:checked')).map(cb => Number(cb.value))
+            });
         KanbanDOM.TASK_TITLE_INPUT.value = "";
         loadTasks();
     }
