@@ -39,7 +39,7 @@
     flex-direction: column;
 }
 
-#task-fields input{
+#task-fields input[type="text"]{
     width: 100%;
     box-sizing: border-box;
 }

@@ -15,3 +15,14 @@ export const FILTER_DIFFICULTY_LEVEL = document.getElementById("filter-difficult
 export const FILTER_ASSIGNED = document.getElementById("filter-assigned");
 export const FILTER_ASSIGNED_ADD_OPTIONS = document.getElementById("filter-assigned-add-options");
 export const SORT_SELECT = document.getElementById("sort-select");
+
+// Update Task
+export const UPDATE_TASK_MODEL = document.getElementById("update-task-modal");
+export const UPDATE_TASK_FORM = document.getElementById("update-task-modal-content");
+export const UPDATE_TASK_TITLE = document.getElementById("task-update-title");
+export const UPDATE_TASK_DESCRIPTION = document.getElementById("task-update-description");
+export const UPDATE_TASK_DIFFICULT_SELECT = document.getElementById("task-update-difficulty-select");
+export const UPDATE_TASK_ASSIGNED_TO_MULTISELECT = document.getElementById("select-assigned-for-update");
+export const UPDATE_TASK_ASSIGNED_TO_MULTISELECT_OPTIONS = document.getElementById("select-assigned-add-options-for-update");
+export const UPDATE_TASK_SAVE_BUTTON = document.getElementById("save-task-edit");
+export const UPDATE_TASK_CLOSE_BUTTON = document.getElementById("close-task-edit")

@@ -3,6 +3,8 @@ import { UserRepository } from "./../DB/userRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
 import * as Tasks from "./task.js";
 import * as Multiselect from "./../multiselect.js";
+import * as UpdateTask from "./update-task.js";
+import { escapeHTML } from "../security.js";
 
 function makeStagesDragOver(){
     const project = Tasks.getProject();
@@ -33,21 +35,28 @@ document.addEventListener("DOMContentLoaded", function () {
     const project = Tasks.getProject();
 
     if (project) {
-        KanbanDOM.PROJECT_NAME_ELEMENT.innerHTML = project.projectName;
+        KanbanDOM.PROJECT_NAME_ELEMENT.innerHTML = escapeHTML(project.projectName);
         makeStagesDragOver();
         
         UserRepository.getList().forEach(user => {
             KanbanDOM.TASK_SELECT_ASSIGNED_ADD_OPTIONS.innerHTML += `
                 <div class="multiselect-option">
                     <label>
-                        <input type="checkbox" value="${user["id"]}"> ${user["name"]}
+                        <input type="checkbox" value="${user["id"]}"> ${escapeHTML(user["name"])}
                     </label>
                 </div>`;
             
             KanbanDOM.FILTER_ASSIGNED_ADD_OPTIONS.innerHTML += `
                 <div class="multiselect-option">
                     <label>
-                        <input type="checkbox" value="${user["id"]}"> ${user["name"]}
+                        <input type="checkbox" value="${user["id"]}"> ${escapeHTML(user["name"])}
+                    </label>
+                </div>`;
+
+            KanbanDOM.UPDATE_TASK_ASSIGNED_TO_MULTISELECT_OPTIONS.innerHTML += `
+                <div class="multiselect-option">
+                    <label>
+                        <input type="checkbox" value="${user["id"]}"> ${escapeHTML(user["name"])}
                     </label>
                 </div>`;
         });

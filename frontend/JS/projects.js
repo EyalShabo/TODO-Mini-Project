@@ -11,7 +11,7 @@ function loadProjectsList(){
     else{
         ProjectsDOM.PROJECTS_LIST_ELEMENT.innerHTML = projectsObjectsList.map(projectObject => 
         `<div class="project-item" data-id="${projectObject["projectId"]}">
-            <h2>${projectObject["projectName"]}</h2>
+            <h2>${escapeHTML(projectObject["projectName"])}</h2>
             <img src="CSS/Images/Icons/grabage.png" alt="Delete Project" class="delete-project-button">
         </div>`).join("");
     }
@@ -27,7 +27,7 @@ ProjectsDOM.ADD_NEW_PROJECT_BUTTON.addEventListener("click", function(e) {
     }
 
     else {
-        ProjectRepository.create(escapeHTML(projectName));
+        ProjectRepository.create(projectName);
         ProjectsDOM.NEW_PROJECT_INPUT.value = "";
         loadProjectsList();
     }

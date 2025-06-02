@@ -2,7 +2,8 @@ import { UserRepository } from "../DB/userRepository.js";
 import { ProjectRepository } from "./../DB/projectRepository.js";
 import { TaskRepository } from "./../DB/taskRepository.js";
 import * as KanbanDOM from "./../DOM/dom.kanban.js";
-import { escapeHTML } from "./../security.js"
+import { escapeHTML } from "./../security.js";
+import * as UpdateTask from "./update-task.js";
 export var draggedTask = null;
 var filterDifficultyArray = [];
 var assignedToArray = [];
@@ -54,6 +55,10 @@ function createElement(taskJson, stage){
     taskElement.querySelector(".delete-task-button").addEventListener("click", function (e) {
         TaskRepository.delete(getProject().projectId, taskElement.dataset.stage, Number(taskElement.dataset.id));
         loadTasks();
+    });
+
+    taskElement.querySelector(".edit-task-button").addEventListener("click", function (e) {
+        UpdateTask.updateTask(getProject().projectId, taskElement.dataset.id, taskElement.dataset.stage);
     });
 
     return taskElement;
@@ -141,6 +146,7 @@ function addTask(){
                 assignedTo: Array.from(KanbanDOM.TASK_SELECT_ASSIGNED.querySelectorAll('input[type="checkbox"]:checked')).map(cb => Number(cb.value))
             });
         KanbanDOM.TASK_TITLE_INPUT.value = "";
+        KanbanDOM.TASK_DESCRIPTION_INPUT.value = "";
         loadTasks();
     }
 }
