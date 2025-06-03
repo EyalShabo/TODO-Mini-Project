@@ -18,8 +18,7 @@ function loadProjectsList(){
 
 }
 
-ProjectsDOM.ADD_NEW_PROJECT_BUTTON.addEventListener("click", function(e) {
-    e.preventDefault();
+function addProject() {
     const projectName = ProjectsDOM.NEW_PROJECT_INPUT.value;
 
     if(!projectName.trim()){
@@ -31,6 +30,16 @@ ProjectsDOM.ADD_NEW_PROJECT_BUTTON.addEventListener("click", function(e) {
         ProjectsDOM.NEW_PROJECT_INPUT.value = "";
         loadProjectsList();
     }
+}
+
+ProjectsDOM.ADD_NEW_PROJECT_BUTTON.addEventListener("click", function(e) {
+    e.preventDefault();
+    addProject();
+});
+
+ProjectsDOM.NEW_PROJECT_FORM.addEventListener("submit", function(e) {
+    e.preventDefault();
+    addProject();
 });
 
 ProjectsDOM.PROJECTS_LIST_ELEMENT.addEventListener("click", function(event) {

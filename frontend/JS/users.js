@@ -17,8 +17,7 @@ function loadUsersList(){
     }
 }
 
-UsersDOM.ADD_NEW_USER_BUTTON.addEventListener("click", function(e) {
-    e.preventDefault();
+function addUser(){
     const name = UsersDOM.NEW_USER_INPUT.value;
 
     if(!name.trim()){
@@ -26,14 +25,24 @@ UsersDOM.ADD_NEW_USER_BUTTON.addEventListener("click", function(e) {
     }
 
     else if(UserRepository.getList().some(user => user.name.toLowerCase() === name.toLowerCase())){
-        alert("This name already exists in the system.");
+        alert("This name already exists in the system.");   
     }
     else{
         UserRepository.create({name: name})
         UsersDOM.NEW_USER_INPUT.value = "";
         loadUsersList();
     }
+}
+
+UsersDOM.ADD_NEW_USER_BUTTON.addEventListener("click", function(e) {
+    e.preventDefault();
+   addUser();
 })
+
+UsersDOM.NEW_USER_FORM.addEventListener("submit", function(e) {
+    e.preventDefault();
+    addUser();
+});
 
 
 UsersDOM.USER_LIST_ELEMENT.addEventListener("click", function(event) {
